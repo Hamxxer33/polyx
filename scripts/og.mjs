@@ -21,7 +21,7 @@ await p.evaluate(async () => {
     </div>
     <div style="position:absolute;left:72px;bottom:58px;display:flex;gap:12px;align-items:center">
       <span style="display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:#C8FF4D;color:#07080A;font-size:20px;font-weight:600">Check your allocation</span>
-      <span style="font-family:'Geist Mono Variable';font-size:15px;letter-spacing:.16em;color:#6B717C;text-transform:uppercase;margin-left:10px">Transactions + NFTs</span>
+      <span style="font-family:'Geist Mono Variable';font-size:15px;letter-spacing:.16em;color:#6B717C;text-transform:uppercase;margin-left:10px">Read live from Polygon</span>
     </div>
   </div>`;
   document.querySelectorAll("svg").forEach((s) => { s.style.width = "100%"; s.style.height = "100%"; });

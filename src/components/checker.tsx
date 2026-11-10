@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { useAccount } from "wagmi";
-import { CHAIN, NFT, PROJECT, SOCIALS, EXTRA_TASKS, TBA, TOKEN, WALLET_RE } from "@/config/polyx";
+import { CHAIN, NFT, NFT_LIVE, PROJECT, SOCIALS, EXTRA_TASKS, TBA, TOKEN, WALLET_RE } from "@/config/polyx";
 import { DEMO_SOCIALS } from "@/config/demo";
 import { checkAllocation, type CheckResult } from "@/lib/check";
 import { buildTasks, prunedDone, type Task } from "@/lib/tasks";
@@ -119,7 +119,7 @@ export function Checker({ demo, initialWallet }: { demo: boolean; initialWallet?
         </form>
       </Step>
 
-      {phase.s === "checking" ? <Scanning wallet={phase.wallet} /> : null}
+      {phase.s === "checking" ? <Scanning wallet={phase.wallet} demo={demo} /> : null}
       {phase.s === "error" ? <ErrorCard msg={phase.msg} onRetry={() => void run(phase.wallet)} /> : null}
       {result ? (
         result.allocation.eligible ? (
@@ -158,7 +158,7 @@ function Step({ n, title, state, children, aside }: { n: number; title: string; 
   );
 }
 
-function Scanning({ wallet }: { wallet: string }) {
+function Scanning({ wallet, demo }: { wallet: string; demo: boolean }) {
   return (
     <section className="panel rise overflow-hidden p-5 sm:p-7" aria-live="polite">
       <div className="flex items-center justify-between">
@@ -169,7 +169,7 @@ function Scanning({ wallet }: { wallet: string }) {
         <div className="scan absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
       </div>
       <div className="mt-6 grid gap-2">
-        {["Counting transactions", `Reading ${NFT.name} balance`, "Applying rates"].map((t, i) => (
+        {["Counting transactions", NFT_LIVE || demo ? `Reading ${NFT.name} balance` : "Checking NFT bonus status", "Applying rates"].map((t, i) => (
           <div key={t} className="flex items-center gap-3 text-[14px] text-muted" style={{ opacity: 1 - i * 0.25 }}>
             <Spinner className="size-4 text-volt" />
             {t}
@@ -204,7 +204,7 @@ function NotEligible({ wallet, onReset }: { wallet: string; onReset: () => void 
       </div>
       <p className="h-display mt-7 text-[30px] leading-tight sm:text-[36px]">No activity found.</p>
       <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted">
-        This wallet has no transactions on {CHAIN.longName} and holds no {NFT.name} NFT. Try the wallet you use most, or come back after you have used the chain.
+        This wallet has no transactions on {CHAIN.longName}{NFT_LIVE ? ` and holds no ${NFT.name} NFT` : ""}. Try the wallet you use most, or come back after you have used the chain.
       </p>
       <button type="button" onClick={onReset} className="btn-ghost mt-6 h-11 px-5 text-[14px]">Check another wallet</button>
     </section>
@@ -289,9 +289,10 @@ function ResultCard({ r, onReset }: { r: Ok; onReset: () => void }) {
         <Row
           dot="bg-iris"
           label={`${NFT.name} NFTs`}
-          detail={r.nftLive ? `${a.nftCount} held` : "Collection not live yet"}
-          rate={a.rates.perNft != null ? `x ${fmt(a.rates.perNft)}` : "rate TBA"}
-          value={a.nftTokens != null ? fmt(a.nftTokens) : TBA}
+          detail={r.nftLive ? `${a.nftCount} held` : "Bonus switches on when the collection launches"}
+          rate={!r.nftLive ? "" : a.rates.perNft != null ? `x ${fmt(a.rates.perNft)}` : "rate TBA"}
+          value={!r.nftLive ? "Soon" : a.nftTokens != null ? fmt(a.nftTokens) : TBA}
+          muted={!r.nftLive}
         />
       </dl>
       <div className="relative flex flex-col gap-3 border-t border-line bg-ink/40 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
@@ -309,7 +310,7 @@ function ResultCard({ r, onReset }: { r: Ok; onReset: () => void }) {
   );
 }
 
-function Row({ dot, label, detail, rate, value }: { dot: string; label: string; detail: string; rate: string; value: string }) {
+function Row({ dot, label, detail, rate, value, muted = false }: { dot: string; label: string; detail: string; rate: string; value: string; muted?: boolean }) {
   return (
     <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 px-5 py-4 sm:grid-cols-[1fr_auto_auto] sm:px-7">
       <dt className="flex items-center gap-3">
@@ -320,7 +321,7 @@ function Row({ dot, label, detail, rate, value }: { dot: string; label: string; 
         </span>
       </dt>
       <span className="hidden font-mono text-[13px] text-muted sm:block">{rate}</span>
-      <dd className="tnum text-right font-display text-[18px] font-medium">{value}</dd>
+      <dd className={cn("tnum text-right font-display font-medium", muted ? "text-[14px] text-faint" : "text-[18px]")}>{value}</dd>
     </div>
   );
 }

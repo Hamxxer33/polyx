@@ -4,13 +4,14 @@ import { SiteFooter } from "@/components/site-footer";
 import { Prism } from "@/components/prism";
 import { Faq } from "@/components/faq";
 import { Arrow, Shield } from "@/components/icons";
-import { CHAIN, NFT, PROJECT, RATES, SCHEDULE, TBA, TOKEN } from "@/config/polyx";
+import { CHAIN, NFT, NFT_LIVE, PROJECT, RATES, SCHEDULE, TBA, TOKEN } from "@/config/polyx";
+import { compact } from "@/lib/format";
 import { fmt, fmtDate } from "@/lib/format";
 
 export const Route = createFileRoute("/")({ component: Landing });
 
 const perTx = RATES.perTx != null ? fmt(RATES.perTx) : TBA;
-const perNft = RATES.perNft != null ? fmt(RATES.perNft) : TBA;
+const perNft = !NFT_LIVE ? "soon" : RATES.perNft != null ? fmt(RATES.perNft) : TBA;
 
 function Landing() {
   return (
@@ -54,7 +55,7 @@ function Hero() {
             <span className="relative whitespace-nowrap text-volt">rewards.</span>
           </h1>
           <p className="rise d2 mt-6 max-w-[520px] text-[17px] leading-relaxed text-muted sm:text-[18px]">
-            {PROJECT.name} rewards wallets for what they have already done. Every transaction on {CHAIN.longName} and every {NFT.name} NFT adds to your share, read live from the chain.
+            {PROJECT.name} rewards wallets for what they have already done. Every transaction on {CHAIN.longName} adds to your share, read live from the chain.{NFT_LIVE ? ` Every ${NFT.name} NFT adds a bonus on top.` : ` A ${NFT.name} NFT bonus is coming at launch.`}
           </p>
           <div className="rise d3 mt-9 flex flex-col gap-3 sm:flex-row">
             <Link to="/check" className="btn-volt h-14 px-7 text-[16px]">
@@ -99,8 +100,8 @@ function PreviewCard() {
 function SpecStrip() {
   const cells = [
     { k: "Network", v: CHAIN.longName },
+    { k: "Total supply", v: TOKEN.totalSupply != null ? `${compact(TOKEN.totalSupply)} ${TOKEN.symbol}` : TBA },
     { k: "Per transaction", v: RATES.perTx != null ? `${perTx} ${TOKEN.symbol}` : TBA },
-    { k: "Per NFT", v: RATES.perNft != null ? `${perNft} ${TOKEN.symbol}` : TBA },
     { k: "Snapshot", v: fmtDate(SCHEDULE.snapshotAt) ?? TBA },
   ];
   return (
@@ -158,7 +159,7 @@ function Formula() {
         <div className="relative mt-12 grid items-stretch gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
           <Term label="Transactions" sub={`Sent from your wallet on ${CHAIN.longName}`} rate={RATES.perTx != null ? `x ${perTx}` : "x rate TBA"} />
           <Op>+</Op>
-          <Term label={`${NFT.name} NFTs`} sub="Held by your wallet at the snapshot" rate={RATES.perNft != null ? `x ${perNft}` : "x rate TBA"} accent="iris" />
+          <Term label={`${NFT.name} NFTs`} sub={NFT_LIVE ? "Held by your wallet at the snapshot" : "Bonus switches on when the collection launches"} rate={!NFT_LIVE ? "Soon" : RATES.perNft != null ? `x ${perNft}` : "x rate TBA"} accent="iris" />
           <Op>=</Op>
           <div className="flex flex-col justify-between rounded-2xl bg-volt p-6 text-ink">
             <p className="font-mono text-[11px] tracking-[0.18em] uppercase opacity-70">Your share</p>

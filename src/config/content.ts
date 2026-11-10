@@ -1,4 +1,4 @@
-import { CHAIN, NFT, PROJECT, RATES, SCHEDULE, TOKEN } from "@/config/polyx";
+import { CHAIN, NFT, NFT_LIVE, PROJECT, RATES, SCHEDULE, TOKEN } from "@/config/polyx";
 import { fmt, fmtDate } from "@/lib/format";
 
 const rateTx = RATES.perTx != null ? `${fmt(RATES.perTx)} ${TOKEN.symbol}` : "a per-transaction rate (announced soon)";
@@ -9,7 +9,7 @@ const claim = fmtDate(SCHEDULE.claimOpensAt) ?? "a date we will announce on our 
 export const FAQ: { q: string; a: string }[] = [
   {
     q: `What is ${PROJECT.name}?`,
-    a: `${PROJECT.name} is a community token distribution that rewards wallets for what they have already done on ${CHAIN.longName}. There is no presale and nothing to buy to qualify. The checker reads public on-chain data and shows what your wallet is worth in the drop.`,
+    a: `${PROJECT.name} is a community token${TOKEN.totalSupply ? ` with a fixed supply of ${TOKEN.totalSupply.toLocaleString("en-US")}` : ""} and a distribution that rewards wallets for what they have already done on ${CHAIN.longName}. There is no presale and nothing to buy to qualify. The checker reads public on-chain data and shows what your wallet is worth in the drop.`,
   },
   {
     q: "How is my allocation calculated?",
@@ -21,7 +21,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: `Do I need a ${NFT.name} NFT?`,
-    a: "No. Transactions alone qualify a wallet. Holding NFTs adds a second, separate bonus on top. A wallet with no transactions still qualifies if it holds at least one NFT.",
+    a: `No. Transactions alone qualify a wallet. Holding NFTs adds a second, separate bonus on top, and a wallet with no transactions still qualifies if it holds at least one NFT.${NFT_LIVE ? "" : ` The ${NFT.name} collection has not launched yet. The bonus switches on automatically when it does.`}`,
   },
   {
     q: "What happens when I submit my wallet?",

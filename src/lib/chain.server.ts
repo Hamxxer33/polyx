@@ -1,4 +1,4 @@
-import { createPublicClient, defineChain, http } from "viem";
+import { createPublicClient, defineChain, fallback, http } from "viem";
 import { CHAIN, NFT } from "@/config/polyx";
 
 const balanceOfAbi = [
@@ -19,8 +19,8 @@ const chain = defineChain({
 });
 
 function client() {
-  const url = process.env.POLYX_RPC_URL?.trim() || CHAIN.rpcUrl;
-  return createPublicClient({ chain, transport: http(url, { timeout: 12_000, retryCount: 1 }) });
+  const urls = [process.env.POLYX_RPC_URL?.trim(), CHAIN.rpcUrl, "rpcBackup" in CHAIN ? CHAIN.rpcBackup : ""].filter(Boolean) as string[];
+  return createPublicClient({ chain, transport: fallback(urls.map((u) => http(u, { timeout: 10_000, retryCount: 1 }))) });
 }
 
 export function nftAddress(): `0x${string}` | null {

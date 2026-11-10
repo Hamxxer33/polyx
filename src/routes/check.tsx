@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Shield } from "@/components/icons";
-import { CHAIN, NFT, PROJECT, RATES, TBA, TOKEN } from "@/config/polyx";
+import { CHAIN, NFT, NFT_LIVE, PROJECT, RATES, TBA, TOKEN } from "@/config/polyx";
 import { DEMO_RATES } from "@/config/demo";
 import { fmt } from "@/lib/format";
 
@@ -33,11 +33,11 @@ function CheckPage() {
           <p className="eyebrow rise">Allocation checker</p>
           <h1 className="h-display rise d1 mt-4 text-[38px] leading-[1.02] sm:text-[52px]">What is your wallet worth?</h1>
           <p className="rise d2 mt-5 max-w-md text-[16px] leading-relaxed text-muted">
-            We read your transactions and {NFT.name} balance from {CHAIN.longName} and apply the {PROJECT.name} rates. Nothing to sign, nothing to pay.
+            We read your transactions{NFT_LIVE ? ` and ${NFT.name} balance` : ""} from {CHAIN.longName} and apply the {PROJECT.name} rates. Nothing to sign, nothing to pay.
           </p>
           <div className="rise d3 mt-8 hidden overflow-hidden rounded-2xl border border-line md:block">
             <RateRow k="Per transaction" v={rates.perTx != null ? `${fmt(rates.perTx)} ${TOKEN.symbol}` : TBA} />
-            <RateRow k="Per NFT" v={rates.perNft != null ? `${fmt(rates.perNft)} ${TOKEN.symbol}` : TBA} />
+            <RateRow k="Per NFT" v={!NFT_LIVE && !demo ? "At NFT launch" : rates.perNft != null ? `${fmt(rates.perNft)} ${TOKEN.symbol}` : TBA} />
             <RateRow k="Transaction cap" v={rates.txCap != null ? fmt(rates.txCap) : "None"} />
             <RateRow k="Network" v={CHAIN.longName} />
           </div>

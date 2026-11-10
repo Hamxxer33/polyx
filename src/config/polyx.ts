@@ -64,7 +64,8 @@ export const CHAINS = {
     id: 137,
     name: "Polygon",
     longName: "Polygon PoS",
-    rpcUrl: "https://polygon-rpc.com",
+    rpcUrl: "https://polygon-bor-rpc.publicnode.com",
+    rpcBackup: "https://polygon.drpc.org",
     explorer: "PolygonScan",
     explorerUrl: "https://polygonscan.com",
     nativeSymbol: "POL",
@@ -79,8 +80,8 @@ export const PROJECT = {
   domain: "polyx.xyz",
   /** PLACEHOLDER: public contact address. Empty hides it. */
   contactEmail: "" as string,
-  /** PLACEHOLDER: which network the checker reads. */
-  chain: "arbitrum" as ChainKey,
+  /** Network the checker reads (Polygon PoS mainnet, confirmed by Hamza). */
+  chain: "polygon" as ChainKey,
   /** Date the Terms and Privacy pages were last updated (display only). */
   legalUpdated: "9 November 2026",
 } as const;
@@ -88,15 +89,14 @@ export const PROJECT = {
 export const CHAIN = CHAINS[PROJECT.chain];
 
 export const TOKEN = {
-  /** PLACEHOLDER */
   name: "POLYX",
-  /** PLACEHOLDER: ticker without the $ */
+  /** Ticker without the $ */
   symbol: "POLYX",
-  /** PLACEHOLDER: ERC-20 address. Empty = "Not deployed yet". */
+  /** PLACEHOLDER: token not live yet. ERC-20 address once deployed. Empty = "Not deployed yet". */
   address: "" as string,
   decimals: 18,
-  /** PLACEHOLDER: whole tokens, e.g. 1_000_000_000. null = TBA. */
-  totalSupply: null as number | null,
+  /** Whole tokens. 1 billion, confirmed. */
+  totalSupply: 1_000_000_000 as number | null,
   /** PLACEHOLDER: share of supply for this airdrop, in percent. null = TBA. */
   airdropPercent: null as number | null,
 } as const;
@@ -104,7 +104,7 @@ export const TOKEN = {
 export const NFT = {
   /** PLACEHOLDER */
   name: "POLYX Genesis",
-  /** PLACEHOLDER: ERC-721 / ERC-1155-with-balanceOf(address) collection on CHAIN. Empty = NFT reads off. */
+  /** PLACEHOLDER: NFT not live yet. ERC-721 collection on CHAIN. Empty = NFT reads off, site shows "launching soon". */
   address: "" as string,
   /** PLACEHOLDER: collection size. null = TBA. */
   supply: null as number | null,
@@ -152,6 +152,9 @@ export const SCHEDULE = {
   /** Wallet submissions close at this time. null = open until announced. */
   submissionsCloseAt: null as string | null,
 } as const;
+
+/** True once an NFT address is configured here (server env POLYX_NFT_ADDRESS can also switch reads on). */
+export const NFT_LIVE = /^0x[a-fA-F0-9]{40}$/.test(NFT.address);
 
 export const WALLET_RE = /^0x[a-fA-F0-9]{40}$/;
 
