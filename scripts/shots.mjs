@@ -98,7 +98,7 @@ for (const kind of ["mobile", "desktop"]) {
   await shot(s, "14-check-eligible-full", { full: true });
 
   await check(s, W.txOnly);
-  await page.getByText("214 sent on Arbitrum").waitFor();
+  await page.getByText("214 sent on Polygon").waitFor();
   await shot(s, "15-check-eligible-tx-only", { focus: "text=Estimated allocation" });
 
   await check(s, W.capped);
