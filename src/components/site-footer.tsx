@@ -39,7 +39,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="wrap flex flex-col gap-2 border-t border-line py-6 text-[12px] text-faint sm:flex-row sm:items-center sm:justify-between">
-        <p>© 2026 {PROJECT.operator}. POLYX is operated by {PROJECT.operator}.</p>
+        <p>© 2026 {PROJECT.name}. All rights reserved.</p>
         <p>Only trust {PROJECT.domain}. We will never DM you first or ask for a seed phrase.</p>
       </div>
     </footer>

@@ -74,13 +74,13 @@ export const CHAINS = {
 
 export const PROJECT = {
   name: "POLYX",
-  /** Legal operator shown in the footer, Terms and Privacy. */
-  operator: "Presdency",
+  /** Operator wording used in Terms and Privacy, mid-sentence (lowercase "the"). */
+  operator: "the POLYX team",
   /** PLACEHOLDER: official domain, shown in the safety notice. */
   domain: "polyx.xyz",
   /** PLACEHOLDER: public contact address. Empty hides it. */
   contactEmail: "" as string,
-  /** Network the checker reads (Polygon PoS mainnet, confirmed by Hamza). */
+  /** Network the checker reads (Polygon PoS mainnet). */
   chain: "polygon" as ChainKey,
   /** Date the Terms and Privacy pages were last updated (display only). */
   legalUpdated: "9 November 2026",

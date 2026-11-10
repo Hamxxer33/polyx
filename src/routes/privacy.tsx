@@ -7,7 +7,7 @@ export const Route = createFileRoute("/privacy")({
   component: () => (
     <LegalPage
       title="Privacy"
-      intro={`${PROJECT.operator} runs ${PROJECT.domain}. We collect as little as possible: a public wallet address when you choose to submit one, and nothing else that identifies you.`}
+      intro={`${PROJECT.operator.charAt(0).toUpperCase()}${PROJECT.operator.slice(1)} runs ${PROJECT.domain}. We collect as little as possible: a public wallet address when you choose to submit one, and nothing else that identifies you.`}
       sections={[
         { h: "What we collect", body: <><p>When you check a wallet, the address is sent to our server only to read public {CHAIN.longName} data. We do not store checked addresses.</p><p>When you submit a wallet, we store that public address and its estimated allocation so it can be included in the final list.</p></> },
         { h: "What we never collect", body: <p>No names, emails, seed phrases, private keys or signatures. Connecting a wallet only shares its public address with this page.</p> },

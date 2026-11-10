@@ -1,6 +1,6 @@
 # POLYX allocation checker
 
-Premium airdrop checker for **POLYX**, operated by **Presdency**. Same model as the Ventran checker
+Premium airdrop checker for **POLYX**, built as a client project. Same model as the Ventran checker
 (www.ventran.xyz): a wallet's allocation is computed from its on-chain transaction count plus its NFT
 balance, visitors complete social steps, and the wallet is filed to a Google Form.
 
@@ -20,7 +20,7 @@ Fonts: Unbounded (display), Geist and Geist Mono (self-hosted via Fontsource).
 | --- | --- |
 | `/` | Landing: hero, specs, how it works, allocation formula, timeline, safety, FAQ, CTA |
 | `/check` | Checker: paste or connect wallet, breakdown, social steps, submit (lock in) |
-| `/terms`, `/privacy` | Legal, operator Presdency |
+| `/terms`, `/privacy` | Legal pages (operator wording in `PROJECT.operator`) |
 | `/api/submit` | POST `{ wallet, allocation }`, files the wallet to Google Forms |
 | anything else | Branded 404 |
 
