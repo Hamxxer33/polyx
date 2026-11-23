@@ -6,7 +6,6 @@ import { DEMO_SOCIALS } from "@/config/demo";
 import { checkAllocation, type CheckResult } from "@/lib/check";
 import { buildTasks, prunedDone, type Task } from "@/lib/tasks";
 import { cn, fmt, short } from "@/lib/format";
-import { ConnectButton } from "@/components/connect-button";
 import { Alert, Arrow, ArrowUpRight, Check, Copy, DiscordLogo, Lock, Search, Spinner, TelegramLogo, XLogo } from "@/components/icons";
 import { Mark } from "@/components/logo";
 
@@ -107,14 +106,10 @@ export function Checker({ demo, initialWallet }: { demo: boolean; initialWallet?
           <p id="wallet-help" className={cn("mt-2.5 text-[13px]", invalid ? "text-danger" : "text-faint")}>
             {invalid ? "That is not a valid address. It starts with 0x followed by 40 letters and numbers." : `Any ${CHAIN.longName} address. Read only, no signature.`}
           </p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+          <div className="mt-5 grid gap-3">
             <button type="submit" className="btn-volt h-[52px] w-full" disabled={phase.s === "checking" || !input.trim()}>
               {phase.s === "checking" ? <><Spinner className="size-[18px]" />Reading {CHAIN.name}…</> : <><Search className="size-[18px]" />Check allocation</>}
             </button>
-            <span className="text-center font-mono text-[11px] tracking-widest text-faint uppercase">or</span>
-            <div>
-              <ConnectButton demo={demo} className="btn-ghost h-[52px] w-full" />
-            </div>
           </div>
         </form>
       </Step>

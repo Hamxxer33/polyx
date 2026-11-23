@@ -74,10 +74,8 @@ function FlowSkeleton() {
         </div>
         <div className="field flex items-center text-faint">0x… paste any address</div>
         <div className="mt-2.5 h-4" />
-        <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+        <div className="mt-5 grid gap-3">
           <div className="btn-volt h-[52px] w-full opacity-60">Check allocation</div>
-          <span />
-          <div className="btn-ghost h-[52px] w-full opacity-60">Connect wallet</div>
         </div>
       </section>
     </div>
