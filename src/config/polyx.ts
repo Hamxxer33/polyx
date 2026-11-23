@@ -95,10 +95,10 @@ export const TOKEN = {
   /** PLACEHOLDER: token not live yet. ERC-20 address once deployed. Empty = "Not deployed yet". */
   address: "" as string,
   decimals: 18,
-  /** Whole tokens. 1 billion, confirmed. */
-  totalSupply: 1_000_000_000 as number | null,
-  /** PLACEHOLDER: share of supply for this airdrop, in percent. null = TBA. */
-  airdropPercent: null as number | null,
+  /** Whole tokens. 10 billion. */
+  totalSupply: 10_000_000_000 as number | null,
+  /** Community airdrop share of supply, in percent. */
+  airdropPercent: 8 as number | null,
 } as const;
 
 export const NFT = {
@@ -114,14 +114,11 @@ export const NFT = {
 
 /**
  * Allocation = min(txCount, txCap) x perTx  +  nftCount x perNft
- *
- * PLACEHOLDER: rates. `null` means not announced: the checker still reads and
- * shows the wallet's transactions and NFTs, but prints "TBA" for amounts.
  */
 export const RATES = {
   /** Tokens per counted transaction. */
-  perTx: null as number | null,
-  /** Tokens per NFT held. */
+  perTx: 230 as number | null,
+  /** Tokens per NFT held. null = TBA until collection size is known. */
   perNft: null as number | null,
   /** Max transactions counted per wallet (anti-farm). null = no cap. */
   txCap: null as number | null,
