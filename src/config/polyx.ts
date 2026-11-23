@@ -16,7 +16,7 @@
  *    GOOGLE_FORM_ALLOCATION_ENTRY  optional entry.<number> for the computed allocation
  *  Client-side (VITE_ prefix, read at build time):
  *    VITE_WALLETCONNECT_PROJECT_ID  Reown / WalletConnect project id
- *    VITE_SITE_URL                  public origin, e.g. https://polyx.xyz (OG tags)
+ *    VITE_SITE_URL                  public origin, e.g. https://getpolyx.xyz (OG tags)
  * ============================================================================
  */
 
@@ -77,7 +77,7 @@ export const PROJECT = {
   /** Operator wording used in Terms and Privacy, mid-sentence (lowercase "the"). */
   operator: "the POLYX team",
   /** PLACEHOLDER: official domain, shown in the safety notice. */
-  domain: "polyx.xyz",
+  domain: "getpolyx.xyz",
   /** PLACEHOLDER: public contact address. Empty hides it. */
   contactEmail: "" as string,
   /** Network the checker reads (Polygon PoS mainnet). */

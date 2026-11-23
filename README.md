@@ -56,7 +56,7 @@ Copy `.env.example`. Nothing here is secret except your RPC key if the URL conta
 | `GOOGLE_FORM_WALLET_ENTRY` | server | `entry.<number>` of the wallet question |
 | `GOOGLE_FORM_ALLOCATION_ENTRY` | server | optional `entry.<number>` for the computed allocation |
 | `VITE_WALLETCONNECT_PROJECT_ID` | client | Reown project id from cloud.reown.com. Without it, Connect uses the browser wallet |
-| `VITE_SITE_URL` | client | Public origin for OG tags, e.g. `https://polyx.xyz` |
+| `VITE_SITE_URL` | client | Public origin for OG tags, e.g. `https://getpolyx.xyz` |
 
 ### Google Form
 
