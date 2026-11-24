@@ -344,15 +344,14 @@ function TasksAndSubmit({ demo, result }: { demo: boolean; result: Ok | null }) 
       <Step
         n={2}
         title="Join the community"
-        state={locked ? "locked" : allDone ? "done" : "active"}
-        aside={!locked && tasks.length ? <span className="font-mono text-[12px] text-muted">{done.length}/{tasks.length}</span> : undefined}
+        state={tasks.length === 0 ? locked ? "locked" : "done" : allDone ? "done" : "active"}
+        aside={tasks.length ? <span className="font-mono text-[12px] text-muted">{done.length}/{tasks.length}</span> : undefined}
       >
-        {locked ? (
-          <p className="text-[14px] text-faint">Check an eligible wallet to unlock this step.</p>
-        ) : tasks.length === 0 ? (
+        {tasks.length === 0 ? (
           <p className="text-[14px] text-muted">Official channels open soon. Nothing to do here yet, go straight to step 3.</p>
         ) : (
           <>
+            <p className="mb-4 text-[14px] text-muted">Complete all requirements below before locking in your wallet.</p>
             <div className="mb-4 h-1 overflow-hidden rounded-full bg-surface-2">
               <div className="h-full rounded-full bg-volt transition-[width] duration-700" style={{ width: `${(done.length / tasks.length) * 100}%` }} />
             </div>
