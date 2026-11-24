@@ -6,9 +6,9 @@ test("no socials means no tasks", () => {
   assert.deepEqual(buildTasks({ x: "", telegram: "", discord: "", post: "" }), []);
 });
 
-test("x + telegram + post", () => {
+test("follow X, join Telegram, and optional post task", () => {
   const t = buildTasks({ x: "polyx", telegram: "polyxchat", discord: "", post: "https://x.com/polyx/status/1" });
-  assert.deepEqual(t.map((x) => x.id), ["follow-x", "notify-x", "repost", "telegram"]);
+  assert.deepEqual(t.map((x) => x.id), ["follow-x", "repost", "telegram"]);
   assert.match(t[0].href, /screen_name=polyx/);
 });
 

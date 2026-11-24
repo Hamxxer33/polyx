@@ -19,13 +19,6 @@ export function buildTasks(s: TaskSources): Task[] {
       href: `https://x.com/intent/follow?screen_name=${encodeURIComponent(s.x)}`,
       kind: "x",
     });
-    out.push({
-      id: "notify-x",
-      label: "Turn on post notifications",
-      detail: "Tap the bell on the profile so you never miss the claim",
-      href: `https://x.com/${encodeURIComponent(s.x)}`,
-      kind: "x",
-    });
     if (s.post) {
       out.push({
         id: "repost",

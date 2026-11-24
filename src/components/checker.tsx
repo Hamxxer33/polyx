@@ -248,7 +248,7 @@ function ResultCard({ r, onReset }: { r: Ok; onReset: () => void }) {
     const amount = a.total != null ? `${fmt(a.total)} $${TOKEN.symbol}` : `a $${TOKEN.symbol} allocation`;
     const parts = [`${fmt(a.txCount)} transactions`, a.nftCount ? `${a.nftCount} ${NFT.name} NFT${a.nftCount === 1 ? "" : "s"}` : null].filter(Boolean).join(" and ");
     const url = typeof window !== "undefined" ? `${window.location.origin}/check` : `https://${PROJECT.domain}/check`;
-    return `My wallet earned ${amount} from ${parts} on ${CHAIN.name}.\n\nCheck yours: ${url}`;
+    return `My wallet earned ${amount} from ${parts} on ${CHAIN.name}.\n\nCheck yours: ${url}\n\n@polyx_market`;
   }, [a]);
 
   return (
@@ -447,7 +447,7 @@ function SubmitStep({ demo, result, ready }: { demo: boolean; result: Ok | null;
   const blocker = locked ? "Check an eligible wallet first." : !ready ? "Complete step 2 to continue." : !agree ? "Accept the terms to continue." : null;
 
   return (
-    <Step n={3} title="Lock in your wallet" state={locked ? "locked" : "active"}>
+    <Step n={3} title="Lock in your wallet" state={locked || !ready ? "locked" : "active"}>
       {locked ? (
         <p className="text-[14px] text-faint">Your wallet is submitted here once the first two steps are done.</p>
       ) : (

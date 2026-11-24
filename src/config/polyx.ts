@@ -131,8 +131,8 @@ export const RATES = {
  * (header, footer, tasks). Handles only, no @.
  */
 export const SOCIALS: { x: string; telegram: string; discord: string; post: string } = {
-  x: "",
-  telegram: "",
+  x: "polyx_market",
+  telegram: "polyxmarkets",
   discord: "", // full invite URL
   /** Optional post for the like + repost task (full URL). */
   post: "",
