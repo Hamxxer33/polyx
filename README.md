@@ -46,11 +46,12 @@ FAQ copy is in `src/config/content.ts` and reads the values above automatically.
 
 ## Environment variables
 
-Copy `.env.example`. Nothing here is secret except your RPC key if the URL contains one.
+Copy `.env.example`. Keep `POLYX_RPC_URL` and `POLYX_ETHERSCAN_API_KEY` private; never expose them in client-side variables.
 
 | Name | Side | Purpose |
 | --- | --- | --- |
 | `POLYX_RPC_URL` | server | Private RPC (Alchemy, QuickNode...). Defaults to the chain's public RPC |
+| `POLYX_ETHERSCAN_API_KEY` | server | Etherscan API V2 key used as a Polygon backup if configured RPC endpoints fail |
 | `POLYX_NFT_ADDRESS` | server | NFT collection, overrides `NFT.address` without a code change |
 | `GOOGLE_FORM_ACTION` | server | `https://docs.google.com/forms/d/e/<id>/formResponse` |
 | `GOOGLE_FORM_WALLET_ENTRY` | server | `entry.<number>` of the wallet question |
