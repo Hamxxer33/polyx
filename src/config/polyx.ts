@@ -134,8 +134,8 @@ export const SOCIALS: { x: string; telegram: string; discord: string; post: stri
   x: "polyx_market",
   telegram: "polyxmarkets",
   discord: "", // full invite URL
-  /** Optional post for the like + repost task (full URL). */
-  post: "",
+  /** Required X post interaction task (like, comment and repost). */
+  post: "https://x.com/polyx_market/status/2125156016644108697?a=E1ZyTB-tZjgeXu_nzu4&s=19",
 };
 
 /** Extra campaign tasks shown after the social ones. */

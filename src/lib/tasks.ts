@@ -21,9 +21,9 @@ export function buildTasks(s: TaskSources): Task[] {
     });
     if (s.post) {
       out.push({
-        id: "repost",
-        label: "Like and repost the launch post",
-        detail: "A quote with your allocation helps even more",
+        id: "engage-launch-post",
+        label: "Like, comment & repost this post",
+        detail: "Complete all three actions on the POLYX post",
         href: s.post,
         kind: "x",
       });
