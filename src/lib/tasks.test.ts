@@ -3,21 +3,25 @@ import assert from "node:assert/strict";
 import { buildTasks, prunedDone } from "./tasks.ts";
 
 test("no socials means no tasks", () => {
-  assert.deepEqual(buildTasks({ x: "", telegram: "", discord: "", post: "" }), []);
+  assert.deepEqual(buildTasks({ x: "", telegram: "", discord: "", posts: [] }), []);
 });
 
-test("follow X, engage with the specified post, and join Telegram", () => {
-  const post = "https://x.com/polyx_market/status/2125156016644108697?a=E1ZyTB-tZjgeXu_nzu4&s=19";
-  const t = buildTasks({ x: "polyx_market", telegram: "polyxmarkets", discord: "", post });
-  assert.deepEqual(t.map((x) => x.id), ["follow-x", "engage-launch-post", "telegram"]);
+test("follow X, engage with every specified post, and join Telegram", () => {
+  const posts = [
+    "https://x.com/polyx_market/status/2125156016644108697?a=E1ZyTB-tZjgeXu_nzu4&s=19",
+    "https://x.com/polyx_market/status/2125408585949794813?a=TaMuSoGsBgVNuyo7X1k&s=46",
+  ];
+  const t = buildTasks({ x: "polyx_market", telegram: "polyxmarkets", discord: "", posts });
+  assert.deepEqual(t.map((x) => x.id), ["follow-x", "engage-post-2125156016644108697", "engage-post-2125408585949794813", "telegram"]);
   assert.match(t[0].href, /screen_name=polyx/);
   assert.equal(t[1].label, "Like, comment & repost this post");
-  assert.equal(t[1].href, post);
-  assert.equal(t[2].href, "https://t.me/polyxmarkets");
+  assert.equal(t[1].href, posts[0]);
+  assert.equal(t[2].href, posts[1]);
+  assert.equal(t[3].href, "https://t.me/polyxmarkets");
 });
 
 test("prunes stale ticks", () => {
-  const t = buildTasks({ x: "polyx", telegram: "", discord: "", post: "" });
+  const t = buildTasks({ x: "polyx", telegram: "", discord: "", posts: [] });
   assert.deepEqual(prunedDone(["follow-x", "old", 3], t), ["follow-x"]);
   assert.deepEqual(prunedDone("nope", t), []);
 });

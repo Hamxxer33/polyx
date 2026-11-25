@@ -130,12 +130,15 @@ export const RATES = {
  * PLACEHOLDER: social handles. Empty strings remove the link everywhere
  * (header, footer, tasks). Handles only, no @.
  */
-export const SOCIALS: { x: string; telegram: string; discord: string; post: string } = {
+export const SOCIALS: { x: string; telegram: string; discord: string; posts: readonly string[] } = {
   x: "polyx_market",
   telegram: "polyxmarkets",
   discord: "", // full invite URL
-  /** Required X post interaction task (like, comment and repost). */
-  post: "https://x.com/polyx_market/status/2125156016644108697?a=E1ZyTB-tZjgeXu_nzu4&s=19",
+  /** Required X post interactions (like, comment and repost on every listed post). */
+  posts: [
+    "https://x.com/polyx_market/status/2125156016644108697?a=E1ZyTB-tZjgeXu_nzu4&s=19",
+    "https://x.com/polyx_market/status/2125408585949794813?a=TaMuSoGsBgVNuyo7X1k&s=46",
+  ],
 };
 
 /** Extra campaign tasks shown after the social ones. */

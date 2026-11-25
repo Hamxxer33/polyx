@@ -5,7 +5,7 @@ export type TaskSources = {
   x: string;
   telegram: string;
   discord: string;
-  post: string;
+  posts: readonly string[];
   extra?: readonly { id: string; label: string; detail: string; href: string }[];
 };
 
@@ -19,12 +19,14 @@ export function buildTasks(s: TaskSources): Task[] {
       href: `https://x.com/intent/follow?screen_name=${encodeURIComponent(s.x)}`,
       kind: "x",
     });
-    if (s.post) {
+    for (const [index, post] of s.posts.entries()) {
+      if (!post) continue;
+      const statusId = post.match(/\/status\/(\d+)/)?.[1] ?? String(index + 1);
       out.push({
-        id: "engage-launch-post",
+        id: `engage-post-${statusId}`,
         label: "Like, comment & repost this post",
-        detail: "Complete all three actions on the POLYX post",
-        href: s.post,
+        detail: `Complete all three actions on POLYX post ${index + 1}`,
+        href: post,
         kind: "x",
       });
     }

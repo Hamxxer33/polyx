@@ -26,5 +26,5 @@ export const DEMO_SOCIALS = {
   x: "polyx",
   telegram: "polyx",
   discord: "https://discord.gg/polyx",
-  post: "https://x.com/polyx/status/1",
+  posts: ["https://x.com/polyx/status/1"],
 } as const;
