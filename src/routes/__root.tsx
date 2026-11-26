@@ -1,4 +1,5 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
 import appCss from "../styles.css?url";
 import { CHAIN, PROJECT, SITE_URL, TOKEN } from "@/config/polyx";
 
@@ -40,6 +41,7 @@ export const Route = createRootRoute({
       </head>
       <body>
         <Outlet />
+        <Analytics />
         <Scripts />
       </body>
     </html>
